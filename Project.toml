@@ -3,6 +3,10 @@ uuid = "fcefd6c4-8de0-11e9-0d15-03bc7c8ec982"
 authors = ["David F. Little"]
 version = "0.1.0"
 
+[deps]
+MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
 [compat]
 julia = "0.7"
 
