@@ -1,4 +1,5 @@
 module LambdaFn
+export @λ
 using MacroTools: postwalk
 using Printf
 
@@ -17,7 +18,7 @@ macro λ(body)
                           "arguments in the same @λ body.")
                 end
 
-                expr = gensym("_",string(length(args)+1))
+                expr = gensym(string("_",length(args)+1))
                 push!(args,expr)
                 expr
             elseif startswith(sym,"_")
