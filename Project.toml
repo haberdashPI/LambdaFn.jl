@@ -1,0 +1,13 @@
+name = "LambdaFn"
+uuid = "fcefd6c4-8de0-11e9-0d15-03bc7c8ec982"
+authors = ["David F. Little"]
+version = "0.1.0"
+
+[compat]
+julia = "0.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
