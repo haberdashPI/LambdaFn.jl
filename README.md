@@ -11,7 +11,7 @@ indicate the arguments. For example:
 ```julia
 using LambdaFn
 
-@λ(_ + _) # == x -> x+x
+@λ(_ + _) # == (x,y) -> x+y
 @λ(_a*_b + _a) # == (a,b) -> a*b + a
 filter(@λ(_.value > 10),data) # == filter(x -> x.value > 10,data)
 ```
