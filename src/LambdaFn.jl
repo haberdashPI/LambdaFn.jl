@@ -3,35 +3,40 @@ export @λ
 using MacroTools: postwalk
 using Printf
 
+@enum BodyType Implicit Numbered Named
+bodytype(sym) = 
+    sym == "_" ? Implicit :
+    occursin(r"^_[0-9]+",sym) ? Numbered :
+    occursin(r"^_[[:alnum:]_]+",sym) ? Named :
+    missing
+
+btype_str(bt,arg) = bt == Implicit ? "_" : string(arg)
+
 macro λ(body)
     args = Vector{Symbol}()
-    implicit::Union{Missing,Bool} = missing
+    btype::Union{Missing,BodyType} = missing
 
     body = postwalk(body) do expr
         if expr isa Symbol
             sym = string(expr)
-            if sym == "_"
-                if ismissing(implicit)
-                    implicit = true
-                elseif !implicit
-                    error("Cannot use both implicit (_) and explicit (_1) "*
-                          "arguments in the same @λ body.")
+            newbtype = bodytype(sym)
+            if !ismissing(newbtype)
+                if ismissing(btype)
+                    btype = newbtype
+                elseif btype != newbtype
+                    error("Anonymous lambda function can have all implicit ",
+                          "(_), all numbered (_1) or all named (_a) arguments.",
+                          "You cannot mix these types. But we found two types",
+                          " of symbols: `$(sym)` and ",
+                          "`$(btype_str(btype,args[end]))`.")
                 end
-
-                expr = gensym(string("_",length(args)+1))
-                push!(args,expr)
-                expr
-            elseif startswith(sym,"_")
-                if ismissing(implicit)
-                    implicit = false
-                elseif implicit
-                    error("Cannot use both implicit (_) and explicit (_1) "*
-                          "arguments in the same @λ body.")
-                end
-
-                if expr ∉ args
+                if btype == Implicit
+                    expr = gensym(string("_",length(args)+1))
+                    push!(args,expr)
+                elseif expr ∉ args
                     push!(args,expr)
                 end
+
                 expr
             else
                 expr
@@ -39,6 +44,10 @@ macro λ(body)
         else
             expr
         end
+    end
+
+    if btype == Numbered
+        args = sort!(args,by=x -> parse(Int,match(r"_([0-9]+)",string(x))[1]))
     end
 
     quote
