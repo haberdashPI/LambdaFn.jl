@@ -8,7 +8,7 @@ It allows the use of three types of function arguments:
 
 1. Implicit - each `_` is replaced with a new symbol
 2. Numbered - each `_[n]` is replaced with the nth argument to the function
-3. Named - each `_[name]` is replace with an argument named `named`.
+3. Named - each `_[name]` is replace with an argument named `name`.
 
 ```julia
 using LambdaFn
@@ -16,7 +16,7 @@ using LambdaFn
 @λ(_ + _) # == (x,y) -> x+y
 @λ(_a*_b + _a) # == (a,b) -> a*b + a
 @λ(_2 - _1) # == (_1,_2) -> _2 - _1
-@test @λ(_1 - _3) # == (_1,_2,_3) -> _1 - _3
+@λ(_1 - _3) # == (_1,_2,_3) -> _1 - _3
 filter(@λ(_.value > 10),data) # == filter(x -> x.value > 10,data)
 ```
 
