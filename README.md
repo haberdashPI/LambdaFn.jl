@@ -1,7 +1,6 @@
 # LambdaFn
 
 [![Build Status](https://travis-ci.org/haberdashPI/LambdaFn.jl.svg?branch=master)](https://travis-ci.org/haberdashPI/LambdaFn.jl)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/haberdashPI/LambdaFn.jl?svg=true)](https://ci.appveyor.com/project/haberdashPI/LambdaFn-jl)
 [![Codecov](https://codecov.io/gh/haberdashPI/LambdaFn.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/haberdashPI/LambdaFn.jl)
 
 This small package provides an alternative syntax for anonymous functions. 
