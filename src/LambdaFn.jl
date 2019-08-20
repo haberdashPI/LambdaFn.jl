@@ -47,7 +47,8 @@ macro λ(body)
     end
 
     if btype == Numbered
-        args = sort!(args,by=x -> parse(Int,match(r"_([0-9]+)",string(x))[1]))
+        numbers = map(x -> parse(Int,match(r"_([0-9]+)",string(x))[1]),args)
+        args = map(x -> Symbol("_",x),minimum(numbers):maximum(numbers))
     end
 
     quote
