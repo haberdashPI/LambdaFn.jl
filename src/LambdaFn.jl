@@ -14,6 +14,7 @@ btype_str(bt,arg) = bt == Implicit ? "_" : string(arg)
 
 macro λ(body)
     args = Vector{Symbol}()
+    found_symbols = Dict{Symbol,Symbol}()
     btype::Union{Missing,BodyType} = missing
 
     body = postwalk(body) do expr
@@ -33,8 +34,14 @@ macro λ(body)
                 if btype == Implicit
                     expr = gensym(string("_",length(args)+1))
                     push!(args,expr)
-                elseif expr ∉ args
-                    push!(args,expr)
+                elseif expr ∉ keys(found_symbols)
+                    gens = gensym(expr)
+                    found_symbols[expr] = gens
+
+                    expr = gens
+                    push!(args,gens)
+                else
+                    expr = found_symbols[expr]
                 end
 
                 expr
@@ -47,8 +54,15 @@ macro λ(body)
     end
 
     if btype == Numbered
-        numbers = map(x -> parse(Int,match(r"_([0-9]+)",string(x))[1]),args)
-        args = map(x -> Symbol("_",x),minimum(numbers):maximum(numbers))
+        symbols = Dict((parse(Int,match(r"_([0-9]+)",string(x))[1]) => x 
+                        for x in args)...)
+        if minimum(keys(symbols)) < 1
+            error("Numbered arguments in lambda function must be ≥ 1.")
+        end
+
+        args = map(1:maximum(keys(symbols))) do num
+            get(symbols,num,gensym(string("_",num)))
+        end
     end
 
     quote
