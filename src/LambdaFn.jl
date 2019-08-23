@@ -1,6 +1,6 @@
 module LambdaFn
 export @λ
-using MacroTools: postwalk
+using MacroTools: prewalk, @capture
 using Printf
 
 @enum BodyType Implicit Numbered Named
@@ -17,8 +17,10 @@ macro λ(body)
     found_symbols = Dict{Symbol,Symbol}()
     btype::Union{Missing,BodyType} = missing
 
-    body = postwalk(body) do expr
-        if expr isa Symbol
+    body = prewalk(body) do expr
+        if @capture(expr,@λ(body__))
+            macroexpand(__module__,expr,recursive=true)
+        elseif expr isa Symbol
             sym = string(expr)
             newbtype = bodytype(sym)
             if !ismissing(newbtype)
@@ -53,21 +55,29 @@ macro λ(body)
         end
     end
 
-    if btype == Numbered
-        symbols = Dict((parse(Int,match(r"_([0-9]+)",string(x))[1]) => x 
-                        for x in args)...)
-        if minimum(keys(symbols)) < 1
-            error("Numbered arguments in lambda function must be ≥ 1.")
+    if ismissing(btype)
+        quote 
+            function lambda()
+                $(esc(body))
+            end
+        end
+    else
+        if btype == Numbered
+            symbols = Dict((parse(Int,match(r"_([0-9]+)",string(x))[1]) => x 
+                            for x in args)...)
+            if minimum(keys(symbols)) < 1
+                error("Numbered arguments in lambda function must be ≥ 1.")
+            end
+
+            args = map(1:maximum(keys(symbols))) do num
+                get(symbols,num,gensym(string("_",num)))
+            end
         end
 
-        args = map(1:maximum(keys(symbols))) do num
-            get(symbols,num,gensym(string("_",num)))
-        end
-    end
-
-    quote
-        function lambda($(map(esc,args)...))
-            $(esc(body))
+        quote
+            function lambda($(map(esc,args)...))
+                $(esc(body))
+            end
         end
     end
 end
