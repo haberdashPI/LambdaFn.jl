@@ -1,7 +1,7 @@
 name = "LambdaFn"
 uuid = "fcefd6c4-8de0-11e9-0d15-03bc7c8ec982"
 authors = ["David F. Little"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
