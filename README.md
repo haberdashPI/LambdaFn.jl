@@ -7,7 +7,7 @@ This small package provides an alternative syntax for writing anonymous function
 
 1. Implicit - each `_` is replaced with a new function argument
 2. Numbered - each `_[n]` is replaced with the nth argument to the function
-3. Named - each `_[name]` is replace with an argument named `name`, and they occur in the function argument list in the same order they appear in the function body.
+3. Named - each `_[name]` is replaced with an argument named `name`, and they occur in the function argument list in the same order they appear in the function body.
 
 ## Examples
 ```julia
