@@ -1,5 +1,5 @@
 module LambdaFn
-export @λ
+export @λ, @lf
 using MacroTools: prewalk, @capture
 using Printf
 
@@ -81,5 +81,6 @@ macro λ(body)
         end
     end
 end
+@eval const $(Symbol("@lf")) = $(Symbol("@λ"))
 
 end # module

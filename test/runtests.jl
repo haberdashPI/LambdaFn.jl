@@ -10,6 +10,7 @@ using Test
     @test @λ(_b - _a)(10,5) == 5
     @test @λ(_1 - _3)(5,1,5) == 0
     @test @λ(2*3)() == 6
+    @test @lf(_ + 1)(1) == 2
     @test 1:10 |> @λ(filter(@λ(_ > 3),_)) == 4:10
     # @test @λ(_)
     @test_throws Exception @eval(@λ(_ + _1))
