@@ -11,6 +11,9 @@ This small package provides an alternative syntax for writing anonymous function
 
 Note that the three types of arguments cannot be mixed: `@λ(_1 + _)` throws an error.
 
+## How to type λ
+Where supported (e.g. Juliabox.com, VSCode, Vim, Julia REPL, or Juno), you can type `λ` starting with a backward slash followed by the word _lambda_ i.e. `\lambda`.
+
 ## Examples
 ```julia
 using LambdaFn
@@ -24,6 +27,3 @@ filter(@λ(_.value > 10),data) # == filter(x -> x.value > 10,data)
 ```
 
 This macro resembles the syntax in [this proposal](https://github.com/JuliaLang/julia/pull/24990), and I basically made this package because I got tired of waiting for that feature. The macro is a little more verbose than the proposed syntax change to julia, but I've grown to like the extra options it allows. I also like that it still has an explicit boundary around the body of the anonymous function, an issue that really complicates use of a bare `_` as an anonymous function argument.
-
-## How to type λ
-Where supported (e.g. Juliabox.com, Julia REPL, and Juon), you can type `λ` starting with a backward slash followed by the word _lambda_ i.e. `\lambda`.
