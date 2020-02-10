@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/haberdashPI/LambdaFn.jl.svg?branch=master)](https://travis-ci.org/haberdashPI/LambdaFn.jl)
 [![Codecov](https://codecov.io/gh/haberdashPI/LambdaFn.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/haberdashPI/LambdaFn.jl)
+[![PkgEval](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/L/LambdaFn.svg)](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html)
 
 This small package provides an alternative syntax for writing anonymous functions. It allows the use of three types of function arguments within the body of a call to `@λ` or `@lf`:
 
