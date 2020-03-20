@@ -28,3 +28,9 @@ filter(@λ(_.value > 10),data) # == filter(x -> x.value > 10,data)
 ```
 
 This macro resembles the syntax in [this proposal](https://github.com/JuliaLang/julia/pull/24990), and I basically made this package because I got tired of waiting for that feature. The macro is a little more verbose than the proposed syntax change to julia, but I've grown to like the extra options it allows. I also like that it still has an explicit boundary around the body of the anonymous function, an issue that really complicates use of a bare `_` as an anonymous function argument.
+
+## Alternatives
+
+- [Underscore.jl](https://github.com/c42f/Underscore.jl) lets you use a single macro applied over multiple functions and use the `_` (or `_1`) syntax for anonymous functions. I think I like it better than this package.
+- [LightQuery.jl](https://github.com/bramtayl/LightQuery.jl) has the `@_` macro, which I know less about.
+- [Lazy.jl](https://github.com/MikeInnes/Lazy.jl) has `@>`, `@>>` and `@as`.
