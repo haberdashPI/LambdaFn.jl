@@ -1,6 +1,7 @@
 # LambdaFn
 
-[![Build Status](https://travis-ci.org/haberdashPI/LambdaFn.jl.svg?branch=master)](https://travis-ci.org/haberdashPI/LambdaFn.jl)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![GitHub Actions](https://github.com/haberdashPI/LambdaFn.jl/workflows/CI/badge.svg)](https://github.com/haberdashPI/LambdaFn.jl/actions?query=workflow%3ACI)
 [![Codecov](https://codecov.io/gh/haberdashPI/LambdaFn.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/haberdashPI/LambdaFn.jl)
 [![PkgEval](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/L/LambdaFn.svg)](https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html)
 
