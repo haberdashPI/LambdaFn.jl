@@ -14,7 +14,7 @@ This small package provides an alternative syntax for writing anonymous function
 Note that the three types of arguments cannot be mixed: `@λ(_1 + _)` throws an error.
 
 ## How to type λ
-Where supported (e.g. Juliabox.com, VSCode, Vim, Julia REPL, or Juno), you can type `λ` starting with a backward slash followed by the word _lambda_ i.e. `\lambda`.
+Where supported (e.g. VSCode, Vim, Julia REPL, or Juno), you can type `λ` starting with a backward slash followed by the word _lambda_ i.e. `\lambda`.
 
 ## Examples
 ```julia
